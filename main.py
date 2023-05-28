@@ -93,3 +93,8 @@ random.shuffle(list1)
 print(list1)
 # Print random element
 print(random.random())
+numbers = [21, 34, 54, 12]
+numbers1 = [number * number for number in range(1, 6)]
+print(numbers1)
+print([numbers * x for x in range(1, 6)])
+
