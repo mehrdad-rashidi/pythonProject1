@@ -1,4 +1,5 @@
 # This is a sample Python script.
+import shutil
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
@@ -6,6 +7,7 @@ from utility import util
 from functools import reduce
 import math
 import random
+import os
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -97,4 +99,168 @@ numbers = [21, 34, 54, 12]
 numbers1 = [number * number for number in range(1, 6)]
 print(numbers1)
 print([numbers * x for x in range(1, 6)])
+tuple1 = ('Hello',)
+greet = 'Python is fun'
+print(greet.upper())
+print(greet.partition('is '))
+print(greet.replace('H', 'T'))
+print(greet.startswith('T'))
+print(greet.isnumeric())
+print(greet.index('y'))
+# escape double quotes
+example = "He said, \"What's there?\""
+# escape single quotes
+example1 = 'He said, "What\'s there?"'
+print(example)
+print(example1)
+
+# Escape Sequence	Description
+# \\	            Backslash
+# \'	            Single quote
+# \"	            Double quote
+# \a	            ASCII Bell
+# \b	            ASCII Backspace
+# \f	            ASCII Form feed
+# \n	            ASCII Linefeed
+# \r	            ASCII Carriage Return
+# \t	            ASCII Horizontal Tab
+# \v	            ASCII Vertical Tab
+# \ooo	            Character with octal value ooo
+# \xHH	            Character with hexadecimal value HH
+name = 'Cathy'
+country = 'UK'
+print(f'{name} is from {country}')
+# create a set of integer type
+student_id = {112, 114, 116, 118, 115}
+print('Student ID:', student_id)
+# create a set of string type
+vowel_letters = {'a', 'e', 'i', 'o', 'u'}
+print('Vowel Letters:', vowel_letters)
+# create a set of mixed data types
+mixed_set = {'Hello', 101, -2, 'Bye'}
+print('Set of mixed data types:', mixed_set)
+numbers = {21, 34, 54, 12}
+print('Initial Set:', numbers)
+# using add() method
+numbers.add(32)
+print('Updated Set:', numbers)
+# The update() method is used to update the set with items other collection types (lists, tuples, sets, etc).
+companies = {'Lacoste', 'Ralph Lauren'}
+tech_companies = ['apple', 'google', 'apple']
+companies.update(tech_companies)
+print(companies)
+languages = {'Swift', 'Java', 'Python'}
+print('Initial Set:', languages)
+# remove 'Java' from a set
+removedValue = languages.discard('Java')
+print('Set after remove():', languages)
+# first set
+A = {1, 3, 5}
+print(' A set is contain :', A)
+# second set
+B = {0, 2, 4}
+print(' B set is contain :', B)
+# perform union operation using |
+print('Union using |:', A | B)
+# perform union operation using union()
+print('Union using union():', A.union(B))
+# perform intersection operation using &
+print('Intersection using &:', A & B)
+# perform intersection operation using intersection()
+print('Intersection using intersection():', A.intersection(B))
+# perform difference operation using &
+print('Difference using &:', A - B)
+# perform difference operation using difference()
+print('Difference using difference():', A.difference(B))
+# try:
+#     textFile = open("/home/mehrdad/Desktop/4444.txt", "r")
+#     readContent = textFile.read()
+#     print(readContent)
+# finally:
+#     textFile.close()
+
+with open("/home/mehrdad/Desktop/4444.txt", "r") as textFileRead:
+    readContent = textFileRead.read(500)
+    print(readContent)
+    with open("/home/mehrdad/Desktop/4444.txt", "w") as textFileWrite:
+        textFileWrite.write(readContent)
+# getcwd() returns the current directory in the form of a string.
+print(os.getcwd())
+# chdir() method to change the current working directory and passed a new path as a string to chdir()
+os.chdir('/home/mehrdad/PycharmProjects/test/')
+print(os.getcwd())
+print(os.listdir())
+print(os.listdir('/home/mehrdad/PycharmProjects/'))
+# delete "mydir" directory and all of its contents
+# shutil.rmtree("mydir")
+# view all the built-in exceptions using the built-in local() function
+print(dir(locals()['__builtins__']))
+
+# AssertionError	    Raised when an assert statement fails.
+# AttributeError	    Raised when attribute assignment or reference fails.
+# EOFError	            Raised when the input() function hits end-of-file condition.
+# FloatingPointError	Raised when a floating point operation fails.
+# GeneratorExit	        Raise when a generator's close() method is called.
+# ImportError	        Raised when the imported module is not found.
+# IndexError	        Raised when the index of a sequence is out of range.
+# KeyError	            Raised when a key is not found in a dictionary.
+# KeyboardInterrupt	    Raised when the user hits the interrupt key (Ctrl+C or Delete).
+# MemoryError	        Raised when an operation runs out of memory.
+# NameError	            Raised when a variable is not found in local or global scope.
+# NotImplementedError	Raised by abstract methods.
+# OSError	            Raised when system operation causes system related error.
+# OverflowError	        Raised when the result of an arithmetic operation is too large to be represented.
+# ReferenceError	    Raised when a weak reference proxy is used to access a garbage collected referent.
+# RuntimeError	        Raised when an error does not fall under any other category.
+# StopIteration	        Raised by next() function to indicate that there is no further item to be returned by iterator.
+# SyntaxError	        Raised by parser when syntax error is encountered.
+# IndentationError	    Raised when there is incorrect indentation.
+# TabError	            Raised when indentation consists of inconsistent tabs and spaces.
+# SystemError	        Raised when interpreter detects internal error.
+# SystemExit	        Raised by sys.exit() function.
+# TypeError	            Raised when a function or operation is applied to an object of incorrect type.
+# UnboundLocalError	    Raised when a reference is made to a local variable in a
+#                       function or method, but no value has been bound to that variable.
+# UnicodeError	        Raised when a Unicode-related encoding or decoding error occurs.
+# UnicodeEncodeError	Raised when a Unicode-related error occurs during encoding.
+# UnicodeDecodeError	Raised when a Unicode-related error occurs during decoding.
+# UnicodeTranslateError	Raised when a Unicode-related error occurs during translating.
+# ValueError	        Raised when a function gets an argument of correct type but improper value.
+# ZeroDivisionError	    Raised when the second operand of division or modulo operation is zero.
+try:
+    even_numbers = [2, 4, 6, 8]
+    print(even_numbers[5])
+
+except ZeroDivisionError:
+    print("Denominator cannot be 0.")
+
+except IndexError:
+    print("Index Out of Bound.")
+
+# program to print the reciprocal of even numbers
+
+try:
+    num = int(input("Enter a number: "))
+    assert num % 2 == 0
+except:
+    print("Not an even number!")
+else:
+    reciprocal = 1/num
+    print(reciprocal)
+try:
+    numerator = 10
+    denominator = 0
+
+    result = numerator / denominator
+
+    print(result)
+except ZeroDivisionError:
+    print("Error: Denominator cannot be 0.")
+
+finally:
+    print("This is finally block.")
+
+
+
+
 
