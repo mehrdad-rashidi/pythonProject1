@@ -21,3 +21,4 @@ if not 5000 < salary < 15000:
 # The custom self.salary attribute is defined to be used later.
 # The inherited __str__ method of the Exception class is then
 # used to display the corresponding message when SalaryNotInRangeError is raised.
+

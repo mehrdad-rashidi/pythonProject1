@@ -5,6 +5,7 @@ import shutil
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from utility import util
 from functools import reduce
+from itertools import count
 import math
 import random
 import os
@@ -245,7 +246,7 @@ try:
 except:
     print("Not an even number!")
 else:
-    reciprocal = 1/num
+    reciprocal = 1 / num
     print(reciprocal)
 try:
     numerator = 10
@@ -259,6 +260,43 @@ except ZeroDivisionError:
 
 finally:
     print("This is finally block.")
+no_of_sides = 4
+my_list0 = [i for i in range(10)]
+my_list1 = [i * 2 for i in range(10)]
+my_list2 = [i * 2 for i in range(10) if i % 2 == 0]
+my_list3 = [i * 2 if i % 2 == 0 else i for i in range(10)]
+my_list4 = [i * j for i in range(4) for j in range(4)]
+my_list5 = [[i * j for j in range(4)] for i in range(4)]
+my_list6 = sides = [0 for i in range(no_of_sides)]
+print(my_list6)
+
+# define a list
+my_list = [4, 7, 0]
+# create an iterator from the list
+iterator = iter(my_list)
+# get the first element of the iterator
+print(next(iterator))  # prints 4
+# get the second element of the iterator
+print(next(iterator))  # prints 7
+# get the third element of the iterator
+print(next(iterator))  # prints 0
+# create a list of integers
+my_list = [1, 2, 3, 4, 5]
+# create an iterator from the list
+iterator = iter(my_list)
+# iterate through the elements of the iterator
+for element in iterator:
+    # Print each element
+    print(element)
+
+
+# create an infinite iterator that starts at 1 and increments by 1 each time
+infinite_iterator = count(1)
+
+# print the first 5 elements of the infinite iterator
+for i in range(5):
+    print(next(infinite_iterator))
+
 
 
 
