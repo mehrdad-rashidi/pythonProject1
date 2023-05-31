@@ -1,14 +1,13 @@
-# This is a sample Python script.
-import shutil
-
 # Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Press Double Shift to search everywhere for class, files, tool windows, actions, and settings.
 from utility import util
+from classes.Celsius import Celsius
 from functools import reduce
 from itertools import count
 import math
 import random
 import os
+import re
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -39,9 +38,9 @@ util.add_numbers(12, 13)
 var = lambda: print('Hello World')
 var()
 # lambda that accepts one argument
-greet_user = lambda name: print('Hey there,', name)
-upgrade = lambda self, value, args, offset=0, limit=None, order=None, count=False: value if count else self.browse(
-    value)
+greet_user = lambda name6: print('Hey there,', name6)
+upgrade = lambda self, value8, args, offset=0, limit=None, order=None, count2=False: value8 if count2 else self.browse(
+    value8)
 list1 = [2, 4, 6, 8]
 print(list1)
 
@@ -289,7 +288,6 @@ for element in iterator:
     # Print each element
     print(element)
 
-
 # create an infinite iterator that starts at 1 and increments by 1 each time
 infinite_iterator = count(1)
 
@@ -298,7 +296,253 @@ for i in range(5):
     print(next(infinite_iterator))
 
 
+# Python Generator
+def my_generator(n):
+    # initialize counter
+    valueGenerator = 0
+    # loop until counter is less than n
+    while valueGenerator < n:
+        # produce the current value of the counter
+        yield valueGenerator
+        # increment the counter
+        valueGenerator += 1
 
 
+# iterate over the generator object produced by my_generator
+for value in my_generator(3):
+    # print each value produced by generator
+    print(value)
+
+# We can also create a generator object from the generator function by calling the function
+# like we would any other function as:
+generator = my_generator(3)
+print(next(generator))  # 0
+print(next(generator))  # 1
+print(next(generator))  # 2
+# Python Generator Expression
+# Generator Expression Syntax is
+# (expression for item in iterable)
+# create the generator object
+squares_generator = (i * i for i in range(5))
+# iterate over the generator and print the values
+for i in squares_generator:
+    print(i)
+
+
+def PowTwoGen(maxNumber=0):
+    n = 0
+    while n < maxNumber:
+        yield 2 ** n
+        n += 1
+
+
+# Generator for Represent Infinite Stream
+def all_even():
+    n = 0
+    while True:
+        yield n
+        n += 2
+
+
+# Pipelining Generators
+# Multiple generators can be used to pipeline a series of operations. This is best illustrated using an example.
+def fibonacci_numbers(nums):
+    x5, y5 = 0, 1
+    # If we do not intend to use items of a sequence within the loop, we can write the loop like this:
+    for _ in range(nums):
+        x5, y5 = y5, x5 + y5
+        yield x5
+
+
+def square(nums):
+    for num1 in nums:
+        yield num1 ** 2
+
+
+print(sum(square(fibonacci_numbers(10))))
+
+
+# Nested function in Python
+def greet(name1):
+    # inner function
+    def display_name():
+        print("Hi", name1)
+
+    # call inner function
+    display_name()
+
+
+# call outer function
+greet("John")
+
+
+# Python Closures
+# All function objects have a __closure__ attribute that returns a tuple of cell objects if it is a closure function.
+# The closure is a nested function that helps us access the outer
+# function's variables even after the external function is closed.
+def greet():
+    # variable defined outside the inner function
+    name2 = "John"
+
+    # return a nested anonymous function
+    return lambda: "Hi " + name2
+
+
+# call the outer function
+message = greet()
+
+# call the inner function
+print(message())
+
+
+# Output: Hi John
+
+def calculate():
+    num3 = 1
+
+    def inner_func():
+        nonlocal num3
+        num3 += 2
+        return num3
+
+    return inner_func
+
+
+# call the outer function
+odd = calculate()
+
+# call the inner function
+print(odd())
+print(odd())
+print(odd())
+
+# call the outer function again
+odd2 = calculate()
+print(odd2())
+
+
+# Pass Function as Argument
+def add(x4, y4):
+    return x4 + y4
+
+
+def calculate(func, x5, y5):
+    return func(x5, y5)
+
+
+result = calculate(add, 4, 6)
+print(result)  # prints 10
+
+
+# Return a Function as a Value
+def greeting(name4):
+    def hello():
+        return "Hello, " + name4 + "!"
+
+    return hello
+
+
+greet = greeting("Atlantis")
+print(greet())  # prints "Hello, Atlantis!"
+
+
+# Output: Hello, Atlantis!
+
+# Python Decorators
+def make_pretty(func):
+    # define the inner function
+    def inner():
+        # add some additional behavior to decorated function
+        print("I got decorated")
+        # call original function
+        func()
+
+    # return the inner function
+    return inner
+
+
+# define ordinary function
+@make_pretty
+def ordinary():
+    print("I am ordinary")
+
+
+# decorate the ordinary function
+# make_pretty() is a decorator.
+decorated_func = make_pretty(ordinary)
+# call the decorated function
+decorated_func()
+# Instead of assigning the function call to a variable,
+# Python provides a much more elegant way to achieve this functionality using the @ symbol.
+# Now call decorator like below
+# Here, the ordinary() function is decorated with the make_pretty() decorator
+# using the @make_pretty syntax, which is equivalent to calling ordinary = make_pretty(ordinary).
+ordinary()
+
+
+# Decorating Functions with Parameters
+def smart_divide(func):
+    def inner(a, b):
+        print("I am going to divide", a, "and", b)
+        if b == 0:
+            print("Whoops! cannot divide")
+            return
+
+        return func(a, b)
+
+    return inner
+
+
+@smart_divide
+def divide(a, b):
+    print(a / b)
+
+
+divide(2, 5)
+divide(2, 0)
+
+
+# Chaining Decorators in Python
+def star(func):
+    def inner(*args, **kwargs):
+        print("*" * 15)
+        func(*args, **kwargs)
+        print("*" * 15)
+
+    return inner
+
+
+def percent(func):
+    def inner(*args, **kwargs):
+        print("%" * 15)
+        func(*args, **kwargs)
+        print("%" * 15)
+
+    return inner
+
+
+@star
+@percent
+def printer(msg):
+    print(msg)
+
+
+printer("Hello")
+
+# create an object
+human = Celsius(37)
+print(human.temperature)
+print(human.to_fahrenheit())
+# coldest_thing = Celsius(-300)
+
+
+pattern = '^a...s$'
+test_string = 'abyss'
+result = re.match(pattern, test_string)
+
+if result:
+    print("Search successful.")
+else:
+    print("Search unsuccessful.")
 
 

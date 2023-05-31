@@ -1,5 +1,5 @@
 class SalaryNotInRangeError(Exception):
-    """Exception raised for errors in the input salary.
+    """Excep raised for errors in the input salary.
 
     Attributes:
         salary -- input salary which caused the error
@@ -16,9 +16,9 @@ salary = int(input("Enter salary amount: "))
 if not 5000 < salary < 15000:
     raise SalaryNotInRangeError(salary)
 
-# Here, we have overridden the constructor of the Exception class to accept our own custom arguments salary and message.
-# Then, the constructor of the parent Exception class is called manually with the self.message argument using super().
+# Here, we have overridden the constructor of the Excep class to accept our own custom arguments salary and message.
+# Then, the constructor of the parent Excep class is called manually with the self.message argument using super().
 # The custom self.salary attribute is defined to be used later.
-# The inherited __str__ method of the Exception class is then
+# The inherited __str__ method of the Excep class is then
 # used to display the corresponding message when SalaryNotInRangeError is raised.
 
