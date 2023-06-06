@@ -1,13 +1,21 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for class, files, tool windows, actions, and settings.
+import pytz
+
 from utility import util
 from classes.Celsius import Celsius
 from functools import reduce
 from itertools import count
+from datetime import date
+from datetime import time
+from datetime import datetime
+import threading
+import time as tm
 import math
 import random
 import os
 import re
+import datetime
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -545,4 +553,319 @@ if result:
 else:
     print("Search unsuccessful.")
 
+# Program to extract numbers from a string
 
+string = 'hello 12 hi 89. Howdy 34'
+pattern = r"\d+"
+# Output: ['12', '89', '34']
+result = re.findall(pattern, string)
+print(result)
+# The re.split method splits the string where there is a match
+# and returns a list of strings where the splits have occurred.
+string = 'Twelve:12 Eighty nine:89.'
+pattern = r'\d+'
+# Output: ['Twelve:', ' Eighty nine:', '.']
+result = re.split(pattern, string)
+print(result)
+
+# The method re.sub() returns a string where matched occurrences are replaced with the content of replace variable.
+# multiline string
+string = 'abc 12\
+de 23 \n f45 6'
+# matches all whitespace characters
+# Program to remove all whitespaces
+pattern = r'\s+'
+# empty string
+replace = ''
+# Output: abc12de23f456
+new_string = re.sub(pattern, replace, string)
+print(new_string)
+
+# You can pass count as a fourth parameter to the re.sub() method.
+# If omitted, it results to 0. This will replace all occurrences.
+# multiline string
+string = 'abc 12\
+de 23 \n f45 6'
+# matches all whitespace characters
+pattern = r'\s+'
+replace = ''
+new_string = re.sub(r'\s+', replace, string, 1)
+# Output:
+# abc12de 23
+# f45 6
+print(new_string)
+# The re.subn() is similar to re.sub() except
+# it returns a tuple of 2 items containing the new string and the number of substitutions made.
+# Program to remove all whitespaces
+# multiline string
+string = 'abc 12\
+de 23 \n f45 6'
+# matches all whitespace characters
+
+# empty string
+replace = ''
+# Output: ('abc12de23f456', 4)
+new_string = re.subn(pattern, replace, string)
+print(new_string)
+
+# The re.search() method takes two arguments:
+# a pattern and a string. The method looks for the first location
+# where the RegEx pattern produces a match with the string.
+string = "Python is fun"
+# check if 'Python' is at the beginning
+match = re.search(r'\APython', string)
+# Output: pattern found inside the string
+if match:
+    print("pattern found inside the string")
+else:
+    print("pattern not found")
+
+# You can get methods and attributes of a match object using dir() function.
+# The match.group() method returns the part of the string where there is a match.
+string = '39801 356, 2102 1111'
+
+# Three-digit number followed by space followed by two-digit number
+pattern = r'(\d{3}) (\d{2})'
+# match variable contains a Match object.
+match = re.search(pattern, string)
+# Output: 801 35
+if match:
+    print(match.group())
+else:
+    print("pattern not found")
+# match.start(), match.end() and match.span()
+# The start() function returns the index of the start of the matched substring.
+# Similarly, end() returns the end index of the matched substring.
+# The span() function returns a tuple containing start and end index of the matched part.
+match.start()
+match.end()
+match.span()
+# match.re and match.string
+# The re attribute of a matched object returns a regular expression object.
+# Similarly, string attribute returns the passed string.
+# get the current date and time
+now = datetime.datetime.now()
+print(now)
+# get current date
+current_date = datetime.date.today()
+print(current_date)
+d = datetime.date(2022, 12, 25)
+print(d)
+# today() to get current date
+today_date = date.today()
+print("Today's date =", today_date)
+# A Unix timestamp is the number of seconds between a particular date
+# and January 1, 1970, at UTC. You can convert a timestamp to date using the fromtimestamp() method.
+timestamp = date.fromtimestamp(1326244364)
+print("Date =", timestamp)
+# date object of today's date
+today = date.today()
+print("Current year:", today.year)
+print("Current month:", today.month)
+print("Current day:", today.day)
+# time(hour = 0, minute = 0, second = 0)
+a = time()
+print(a)
+
+# time(hour, minute and second)
+b = time(11, 34, 56)
+print(b)
+# time(hour, minute and second)
+c = time(hour=11, minute=34, second=56)
+print(c)
+# time(hour, minute, second, microsecond)
+d = time(11, 34, 56, 234566)
+print(d)
+a = time(11, 34, 56)
+
+print("Hour =", a.hour)
+print("Minute =", a.minute)
+print("Second =", a.second)
+print("Microsecond =", a.microsecond)
+# current date and time
+now = datetime.datetime.now()
+t = now.strftime("%H:%M:%S")
+print("Time:", t)
+s1 = now.strftime("%m/%d/%Y, %H:%M:%S")
+# mm/dd/YY H:M:S format
+print("s1:", s1)
+s2 = now.strftime("%d/%m/%Y, %H:%M:%S")
+# dd/mm/YY H:M:S format
+print("s2:", s2)
+
+# %Y - year   [0001,..., 2018, 2019,..., 9999]
+# %m - month  [01, 02, ..., 11, 12]
+# %d - day    [01, 02, ..., 30, 31]
+# %H - hour   [00, 01, ..., 22, 23
+# %M - minute [00, 01, ..., 58, 59]
+# %S - second [00, 01, ..., 58, 59]
+date_string = "25 December, 2022"
+print("date_string =", date_string)
+
+# use strptime() to create date object
+date_object = datetime.datetime.strptime(date_string, "%d %B, %Y")
+print("date_object =", date_object)
+local = datetime.datetime.now()
+print("Local:", local.strftime("%m/%d/%Y, %H:%M:%S"))
+
+tz_NY = pytz.timezone('America/New_York')
+datetime_NY = datetime.datetime.now(tz_NY)
+print("NY:", datetime_NY.strftime("%m/%d/%Y, %H:%M:%S"))
+
+tz_London = pytz.timezone('Europe/London')
+datetime_London = datetime.datetime.now(tz_London)
+print("London:", datetime_London.strftime("%m/%d/%Y, %H:%M:%S"))
+
+now = datetime.datetime.now()  # current date and time
+
+year = now.strftime("%Y")
+print("year:", year)
+
+month = now.strftime("%m")
+print("month:", month)
+
+day = now.strftime("%d")
+print("day:", day)
+
+time = now.strftime("%H:%M:%S")
+print("time:", time)
+
+date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+print("date and time:", date_time)
+# Creating string from a timestamp
+timestamp = 1528797322
+date_time = datetime.datetime.fromtimestamp(timestamp)
+print("Date time object:", date_time)
+d = date_time.strftime("%m/%d/%Y, %H:%M:%S")
+print("Output 2:", d)
+d = date_time.strftime("%d %b, %Y")
+print("Output 3:", d)
+d = date_time.strftime("%d %B, %Y")
+print("Output 4:", d)
+d = date_time.strftime("%I%p")
+print("Output 5:", d)
+# Directive	Meaning	                                                                        Example
+# %a	    Abbreviated weekday name.	                                                    Sun, Mon, ...
+# %A	    Full weekday name.	                                                            Sunday, Monday, ...
+# %w	    Weekday as a decimal number.	                                                0, 1, ..., 6
+# %d	    Day of the month as a zero-padded decimal.	                                    01, 02, ..., 31
+# %-d	    Day of the month as a decimal number.	                                        1, 2, ..., 30
+# %b	    Abbreviated month name.	                                                        Jan, Feb, ..., Dec
+# %B	    Full month name.	                                                            January, February, ...
+# %m	    Month as a zero-padded decimal number.	                                        01, 02, ..., 12
+# %-m	    Month as a decimal number.	                                                    1, 2, ..., 12
+# %y	    Year without century as a zero-padded decimal number.	                        00, 01, ..., 99
+# %-y	    Year without century as a decimal number.	                                    0, 1, ..., 99
+# %Y	    Year with century as a decimal number.	                                        2013, 2019 etc.
+# %H	    Hour (24-hour clock) as a zero-padded decimal number.	                        00, 01, ..., 23
+# %-H	    Hour (24-hour clock) as a decimal number.	                                    0, 1, ..., 23
+# %I	    Hour (12-hour clock) as a zero-padded decimal number.	                        01, 02, ..., 12
+# %-I	    Hour (12-hour clock) as a decimal number.	                                    1, 2, ... 12
+# %p	    Locale’s AM or PM.	                                                            AM, PM
+# %M	    Minute as a zero-padded decimal number.	                                        00, 01, ..., 59
+# %-M	    Minute as a decimal number.	                                                    0, 1, ..., 59
+# %S	    Second as a zero-padded decimal number.	                                        00, 01, ..., 59
+# %-S	    Second as a decimal number.	                                                    0, 1, ..., 59
+# %f	    Microsecond as a decimal number, zero-padded on the left.	                    000000 - 999999
+# %z	    UTC offset in the form +HHMM or -HHMM.
+# %Z	    Time zone name.
+# %j	    Day of the year as a zero-padded decimal number.	                            001, 002, ..., 366
+# %-j	    Day of the year as a decimal number.	                                        1, 2, ..., 366
+# %U	    Week number of the year (Sunday as the first day of the week).
+# All days in a new year preceding the first Sunday are considered to be in week 0.	        00, 01, ..., 53
+# %W	    Week number of the year (Monday as the first day of the week).
+# All days in a new year preceding the first Monday are considered to be in week 0. 	    00, 01, ..., 53
+# %c    	Locale’s appropriate date and time representation.	                            Mon Sep 30 07:06:05 2013
+# %x    	Locale’s appropriate date representation.	                                    09/30/13
+# %X    	Locale’s appropriate time representation.	                                    07:06:05
+# %%    	A literal '%' character.	                                                    %
+
+# Locale's appropriate date and time
+timestamp = 1528797322
+date_time = datetime.datetime.fromtimestamp(timestamp)
+d = date_time.strftime("%c")
+print("Output 1:", d)
+d = date_time.strftime("%x")
+print("Output 2:", d)
+d = date_time.strftime("%X")
+print("Output 3:", d)
+date_string = "21 June, 2018"
+
+# string to datetime object
+print("date_string =", date_string)
+print("type of date_string =", type(date_string))
+date_object = datetime.datetime.strptime(date_string, "%d %B, %Y")
+print("date_object =", date_object)
+print("type of date_object =", type(date_object))
+today = date.today()
+
+# dd/mm/YY
+d1 = today.strftime("%d/%m/%Y")
+print("d1 =", d1)
+# Textual month, day and year
+d2 = today.strftime("%B %d, %Y")
+print("d2 =", d2)
+# mm/dd/y
+d3 = today.strftime("%m/%d/%y")
+print("d3 =", d3)
+# Month abbreviation, day and year
+d4 = today.strftime("%b-%d-%Y")
+print("d4 =", d4)
+# datetime object containing current date and time
+now = datetime.datetime.now()
+print("now =", now)
+# dd/mm/YY H:M:S
+dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+print("date and time =", dt_string)
+# Current time using the datetime object
+current_time = now.strftime("%H:%M:%S")
+print("Current Time =", current_time)
+# Get the timezone object for New York
+tz_NY = pytz.timezone('America/New_York')
+
+# Get the current time in New York
+datetime_NY = datetime.datetime.now(tz_NY)
+
+# Format the time as a string and print it
+print("NY time:", datetime_NY.strftime("%H:%M:%S"))
+
+# Get the timezone object for London
+tz_London = pytz.timezone('Europe/London')
+
+# Get the current time in London
+datetime_London = datetime.datetime.now(tz_London)
+
+# Format the time as a string and print it
+print("London time:", datetime_London.strftime("%H:%M:%S"))
+print("Printed immediately.")
+print("Printed immediately.")
+tm.sleep(2.4)
+print("Printed after 2.4 seconds.")
+counter = 0
+while True:
+    localtime = tm.localtime()
+    result = tm.strftime("%I:%M:%S %p", localtime)
+    print(result)
+    tm.sleep(1)
+    counter += 1
+    if counter >= 5:
+        break
+
+
+def print_hello_three_times():
+    for i in range(3):
+        tm.sleep(0.5)
+        print("Hello")
+
+
+def print_hi_three_times():
+    for i in range(3):
+        tm.sleep(0.9)
+        print("Hi")
+
+
+t1 = threading.Thread(target=print_hello_three_times)
+t2 = threading.Thread(target=print_hi_three_times)
+
+t1.start()
+t2.start()
