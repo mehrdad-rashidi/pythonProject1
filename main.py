@@ -1,7 +1,6 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for class, files, tool windows, actions, and settings.
 import pytz
-
 from utility import util
 from classes.Celsius import Celsius
 from functools import reduce

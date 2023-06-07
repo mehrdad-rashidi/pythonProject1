@@ -1,11 +1,24 @@
+import mysql.connector
 
 
 class MysqlConnection:
+
     def __init__(self, host, user, password, database):
+        self.__connection = None
         self.__host = host
         self.__user = user
         self.__password = password
         self.__database = database
+
+    def mysqlConnection(self, host, user, password, database):
+        try:
+            __connection = mysql.connector.connect(host=host, database=database, user=user, password=password)
+            if __connection.is_connected():
+                print('Connected to MySQL database')
+                return self.__connection
+        except mysql.connector.Error as e:
+            print('Reason Error Connect to Database is : ', e)
+            exit()
 
     @property
     def host(self):
@@ -23,6 +36,10 @@ class MysqlConnection:
     def database(self):
         return self.__database
 
+    @property
+    def connection(self):
+        return self.connection
+
     @host.setter
     def host(self, value):
         self.__host = value
@@ -38,3 +55,7 @@ class MysqlConnection:
     @database.setter
     def database(self, value):
         self.__database = value
+
+    @connection.setter
+    def connection(self, value):
+        self.connection = value
