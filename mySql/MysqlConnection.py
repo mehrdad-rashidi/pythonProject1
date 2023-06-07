@@ -4,20 +4,22 @@ import mysql.connector
 class MysqlConnection:
 
     def __init__(self, host, user, password, database):
+        self.__test = None
         self.__connection = None
         self.__host = host
         self.__user = user
         self.__password = password
         self.__database = database
 
-    def mysqlConnection(self, host, user, password, database):
+    def mysqlConnection(self, host, user, password, database, port):
         try:
-            __connection = mysql.connector.connect(host=host, database=database, user=user, password=password)
+            __connection = mysql.connector.connect(host=host, user=user, password=password, database=database,
+                                                   port=port)
             if __connection.is_connected():
                 print('Connected to MySQL database')
                 return self.__connection
         except mysql.connector.Error as e:
-            print('Reason Error Connect to Database is : ', e)
+            print('Reason Error Connect to Database is : ', e.msg, ' Error Code : ', e.errno, 'SqlStat : ', e.sqlstate)
             exit()
 
     @property

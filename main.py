@@ -1,5 +1,6 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for class, files, tool windows, actions, and settings.
+import mysql.connector
 import pytz
 from utility import util
 from classes.Celsius import Celsius
@@ -15,6 +16,8 @@ import random
 import os
 import re
 import datetime
+import mySql.MysqlConnection1
+import mySql.MysqlConnection
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -868,3 +871,7 @@ t2 = threading.Thread(target=print_hi_three_times)
 
 t1.start()
 t2.start()
+
+mysqlconn = mySql.MysqlConnection1.MysqlConnection1('localhost', 'root', 'Yazd3231@', 'employees')
+print(mysqlconn)
+mysqlconn.closeConnection()
