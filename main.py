@@ -18,6 +18,8 @@ import re
 import datetime
 import mySql.MysqlConnection1
 import mySql.MysqlConnection
+import orm.ObjectRelationalMapper
+import orm.Database
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -492,8 +494,8 @@ ordinary()
 
 # Decorating Functions with Parameters
 def smart_divide(func):
-    def inner(a, b):
-        print("I am going to divide", a, "and", b)
+    def inner(a6, b6):
+        print("I am going to divide", a6, "and", b6)
         if b == 0:
             print("Whoops! cannot divide")
             return
@@ -504,8 +506,8 @@ def smart_divide(func):
 
 
 @smart_divide
-def divide(a, b):
-    print(a / b)
+def divide(a7, b7):
+    print(a7 / b7)
 
 
 divide(2, 5)
@@ -875,3 +877,40 @@ t2.start()
 mysqlconn = mySql.MysqlConnection1.MysqlConnection1('localhost', 'root', 'Yazd3231@', 'employees')
 print(mysqlconn)
 mysqlconn.closeConnection()
+
+# Create a database instance
+db = orm.Database.Database(host='localhost', username='root', password='password', database='my_database')
+
+# Connect to the database
+db.connect()
+
+# Create an ORM instance
+orm = orm.ObjectRelationalMapper.ObjectRelationalMapper(database=db)
+
+# Define table name
+table_name = 'my_table'
+
+# Save data to the table
+data = {'column1': 'value1', 'column2': 'value2', 'column3': 'value3'}
+orm.save(table=table_name, data=data)
+
+# Find all rows in the table
+result_all = orm.find_all(table=table_name)
+print(result_all)  # Print all rows
+
+# Find a specific row based on conditions
+conditions = "column1 = 'value1'"
+result_row = orm.find_by_conditions(table=table_name, conditions=conditions)
+print(result_row)  # Print the specific row
+
+# Update a row in the table
+updated_data = {'column1': 'new value'}
+conditions = "id = 1"
+orm.update(table=table_name, data=updated_data, conditions=conditions)
+
+# Delete a row from the table
+conditions = "id = 1"
+orm.delete(table=table_name, conditions=conditions)
+
+# Disconnect from the database
+db.disconnect()

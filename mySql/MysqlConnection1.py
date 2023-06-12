@@ -25,14 +25,6 @@ class MysqlConnection1:
             print('Reason Error Connect to Database is : ', e.msg, ' Error Code : ', e.errno, 'SqlStat : ', e.sqlstate)
             exit()
 
-    def closeConnection(self, commit=True):
-        if commit:
-            self.connection.commit()
-        self.connection.close()
-
-    def execute(self, sql, params=None):
-        self.cursor.execute(sql, params=params or ())
-
     @property
     def connection(self):
         return self.__connection
@@ -41,9 +33,25 @@ class MysqlConnection1:
     def cursor(self):
         return self.__cursor
 
+    def fetchAll(self):
+        return self.cursor.fetchall()
+
+    def commit(self):
+        self.connection.commit()
+
+    def closeConnection(self, commit=True):
+        if commit:
+            self.connection.commit()
+        self.connection.close()
+
     @property
     def host(self):
         return self.__host
+
+    def execute(self, sql, params=None):
+        self.cursor.execute(sql, params=params or ())
+
+        self.connection.commit()
 
     @property
     def user(self):
