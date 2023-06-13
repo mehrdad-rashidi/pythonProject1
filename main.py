@@ -2,6 +2,8 @@
 # Press Double Shift to search everywhere for class, files, tool windows, actions, and settings.
 import mysql.connector
 import pytz
+
+from entity.MyEntity import MyEntity
 from utility import util
 from classes.Celsius import Celsius
 from functools import reduce
@@ -914,3 +916,11 @@ orm.delete(table=table_name, conditions=conditions)
 
 # Disconnect from the database
 db.disconnect()
+
+# Create an instance of MyEntity
+entity = MyEntity()
+
+# Access the defined column annotations
+annotations = entity.__annotations__
+for column_name, annotation in annotations.items():
+    print(f"{column_name}: {annotation}")
